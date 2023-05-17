@@ -1,3 +1,19 @@
 .overview-container {
     width: 100%;
 }
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-container {
+    max-width: 500px;
+}
+
+.overview-header {
+    text-align: center;
+    padding: 10px 0;
+}
