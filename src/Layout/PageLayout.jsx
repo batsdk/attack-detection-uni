@@ -49,8 +49,6 @@ const PageLayout = ({ children }) => {
 
         <main className="layout-child">{children}</main>
       </div>
-
-      <footer>footer</footer>
     </>
   );
 };
