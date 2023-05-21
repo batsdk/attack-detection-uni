@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+.overview-bg {
+    background: #0B2447;
+}
+
 .overview-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -15,7 +19,9 @@
 
 .overview-header {
     text-align: center;
+    margin-top:0;
     padding: 10px 0;
+    color: #FEFBF6;
 }
 
 .card-details {

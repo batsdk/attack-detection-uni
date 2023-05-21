@@ -14,6 +14,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import { makeStyles } from "@mui/styles";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -30,16 +32,19 @@ const Overview = () => {
   }
 
   const modelColors = {
-    data_poison: '#088395',
-    model_poison: '#F6BA6F',
-    byzantine: '#FF6969',
-    sybil: '#865DFF',
-
-  }
+    data_poison: "#088395",
+    model_poison: "#F6BA6F",
+    byzantine: "#FF6969",
+    sybil: "#865DFF",
+  };
 
   const [barChartData, setBarChartData] = useState([
     { name: "Data \n Poisoning", attacks: 40, color: modelColors.data_poison },
-    { name: "Model \n Poisoning", attacks: 12, color: modelColors.model_poison },
+    {
+      name: "Model \n Poisoning",
+      attacks: 12,
+      color: modelColors.model_poison,
+    },
     { name: "Byzantine", attacks: 31, color: modelColors.byzantine },
     { name: "Sybil", attacks: 27, color: modelColors.sybil },
   ]);
@@ -53,14 +58,28 @@ const Overview = () => {
   ]);
 
   const [performancePieChart, setPerformancePieChart] = useState([
-    { name: "Data Poisoning", value: 400, color : modelColors.data_poison },
-    { name: "Model Poisoning", value: 300, color : modelColors.model_poison },
-    { name: "Byzantine", value: 300, color : modelColors.byzantine},
-    { name: "Sybil", value: 200, color : modelColors.sybil },
+    { name: "Data Poisoning", value: 400, color: modelColors.data_poison },
+    { name: "Model Poisoning", value: 300, color: modelColors.model_poison },
+    { name: "Byzantine", value: 300, color: modelColors.byzantine },
+    { name: "Sybil", value: 200, color: modelColors.sybil },
   ]);
 
+  const useStyles = makeStyles({
+    tableContainer: {
+      backgroundColor: "#333", // Set the background color for the table container
+    },
+    tableHeaderCell: {
+      color: "#fff", // Set the text color for table header cells
+    },
+    tableCell: {
+      color: "#fff", // Set the text color for table cells
+    },
+  });
+
+  const classes = useStyles();
+
   return (
-    <div>
+    <div className="overview-bg">
       <h1 className="overview-header">Overview of All Attacks</h1>
 
       <div className="overview-grid">
@@ -70,7 +89,7 @@ const Overview = () => {
           <YAxis />
           <Tooltip />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-          <Bar dataKey="attacks">
+          <Bar dataKey="attacks" barSize={25} >
             {barChartData.map(({ color }, index) => (
               <Cell key={`cell-${index}`} fill={color} />
             ))}
@@ -79,18 +98,28 @@ const Overview = () => {
 
         {/* Attack Table */}
         <div className="table-container">
-          <TableContainer component={Paper}>
+          <TableContainer className={classes.tableContainer} component={Paper}>
             <Table
               sx={{ minWidth: 450, maxWidth: 500 }}
               aria-label="simple table"
             >
               <TableHead>
                 <TableRow>
-                  <TableCell>Seq. No.</TableCell>
-                  <TableCell align="right">Date</TableCell>
-                  <TableCell align="right">Time</TableCell>
-                  <TableCell align="right">Attack Type</TableCell>
-                  <TableCell align="right">Model ID</TableCell>
+                  <TableCell className={classes.tableHeaderCell}>
+                    Seq. No.
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell} align="right">
+                    Date
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell} align="right">
+                    Time
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell} align="right">
+                    Attack Type
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell} align="right">
+                    Model ID
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -99,13 +128,25 @@ const Overview = () => {
                     key={row.seq_no}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell component="th" scope="row">
+                    <TableCell
+                      className={classes.tableCell}
+                      component="th"
+                      scope="row"
+                    >
                       {row.seq_no}
                     </TableCell>
-                    <TableCell align="right">{row.date}</TableCell>
-                    <TableCell align="right">{row.time}</TableCell>
-                    <TableCell align="right">{row.attack_type}</TableCell>
-                    <TableCell align="right">{row.model_id}</TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.date}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.time}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.attack_type}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.model_id}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -125,25 +166,24 @@ const Overview = () => {
             fill="#22c55e"
             label
           >
-          {performancePieChart.map(({color}, index) => (
-            <Cell key={`cell-${index}`} fill={color} />
-          ))}
+            {performancePieChart.map(({ color }, index) => (
+              <Cell key={`cell-${index}`} fill={color} />
+            ))}
           </Pie>
           <Tooltip />
         </PieChart>
 
         {/* Card Details */}
-            <div className="card-details">
-              <div className="single-card">
-                <h3 className="card-h3" >12</h3>
-                <h4 className="card-h4" >Attack Count</h4>
-              </div>
-              <div className="single-card">
-                <h3 className="card-h3" >12</h3>
-                <h4 className="card-h4" >Attack Count</h4>
-              </div>
-            </div>
-
+        <div className="card-details">
+          <div className="single-card">
+            <h3 className="card-h3">12</h3>
+            <h4 className="card-h4">Attack Count</h4>
+          </div>
+          <div className="single-card">
+            <h3 className="card-h3">04</h3>
+            <h4 className="card-h4">Client Num.</h4>
+          </div>
+        </div>
       </div>
     </div>
   );
