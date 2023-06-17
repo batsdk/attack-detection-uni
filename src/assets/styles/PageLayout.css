@@ -30,7 +30,9 @@ a {
 }
 
 .active-link {
-  color: #fff;
+  /* color: #fff; */
+  color: #5a6acf;
+
   font-size: 20px;
   width: 100%;
   text-align: center;
@@ -39,7 +41,9 @@ a {
 }
 
 .pending-link {
-  color: #fff;
+  /* color: #fff; */
+  color: #273240c9;
+
   font-size: 20px;
   width: 100%;
   text-align: center;
