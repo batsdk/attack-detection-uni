@@ -18,18 +18,11 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
-
-  /* min-width: 320px;
-  max-width: 320px;
-  background: #00346b;
-  color: #fff; */
-
-  /* new styles */
   min-width: 240px;
   max-width: 240px;
-  background: #f1f2f7;
-  color: #273240;
+  min-height: 100vh;
+  background: #363740;
+  color: #fff;
 }
 
 .layout-child {

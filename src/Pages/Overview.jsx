@@ -1,55 +1,191 @@
 import React, { useState } from "react";
-import ReactFC from "react-fusioncharts";
-import FusionCharts from "fusioncharts";
-import Column2D from "fusioncharts/fusioncharts.charts";
-import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
+
+
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
+import { makeStyles } from "@mui/styles";
+
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
+import "../assets/styles/Overview.css";
 
 const Overview = () => {
+  function createData(seq_no, date, time, attack_type, model_id) {
+    return { seq_no, date, time, attack_type, model_id };
+  }
+
+  const modelColors = {
+    data_poison: "#088395",
+    model_poison: "#F6BA6F",
+    byzantine: "#FF6969",
+    sybil: "#865DFF",
+  };
+
   const [barChartData, setBarChartData] = useState([
+    { name: "Data \n Poisoning", attacks: 40, color: modelColors.data_poison },
     {
-      label: "Data Poisoning",
-      value: "290",
+      name: "Model \n Poisoning",
+      attacks: 12,
+      color: modelColors.model_poison,
     },
-    {
-      label: "Model Poisoning",
-      value: "260",
-    },
-    {
-      label: "Byzantine",
-      value: "180",
-    },
-    {
-      label: "Sybil",
-      value: "140",
-    },
+    { name: "Byzantine", attacks: 31, color: modelColors.byzantine },
+    { name: "Sybil", attacks: 27, color: modelColors.sybil },
   ]);
 
-  // Create a JSON object to store the chart configurations
-const chartConfigs = {
-  type: "column2d", // The chart type
-  width: "400", // Width of the chart
-  height: "400", // Height of the chart
-  dataFormat: "json", // Data type
-  dataSource: {
-    // Chart Configuration
-    chart: {
-      caption: "Attack Types and Number of Attacks",    //Set the chart caption
-      subCaption: "",             //Set the chart subcaption
-      xAxisName: "Attack Type",           //Set the x-axis name
-      yAxisName: "Number of Attacks",  //Set the y-axis name
-      numberSuffix: "",
-      theme: "fusion"                 //Set the theme for your chart
+  const [attackTabeRows, setAttackTabeRows] = useState([
+    createData(1, "2022/1/14", 6.0, "Data Poisoning", 4),
+    createData(2, "2023/12/10", 9.0, "Sybil", 43),
+    createData(3, "2021/10/30", 16.0, "Sybil", 60),
+    createData(4, "2018/1/14", 3.7, "Byzantine", 43),
+    createData(5, "2020/10/22", 16.0, "Sybil", 39),
+  ]);
+
+  const [performancePieChart, setPerformancePieChart] = useState([
+    { name: "Data Poisoning", value: 400, color: modelColors.data_poison },
+    { name: "Model Poisoning", value: 300, color: modelColors.model_poison },
+    { name: "Byzantine", value: 300, color: modelColors.byzantine },
+    { name: "Sybil", value: 200, color: modelColors.sybil },
+  ]);
+
+  const useStyles = makeStyles({
+    tableContainer: {
+      backgroundColor: "#333", // Set the background color for the table container
     },
-    // Chart Data - from step 2
-    data: barChartData
-  }
-};
+    tableHeaderCell: {
+      color: "#fff", // Set the text color for table header cells
+    },
+    tableCell: {
+      color: "#fff", // Set the text color for table cells
+    },
+  });
+
+  const classes = useStyles();
 
   return (
-    <div>
-      <h1>Overview Page</h1>
-      <ReactFC {...chartConfigs} />
+    <div className="overview-bg">
+      <h1 className="overview-header">Overview of All Attacks</h1>
+
+      <div className="overview-grid">
+        {/* Attack Bar Chat */}
+        <BarChart width={550} height={300} data={barChartData}>
+          <XAxis dataKey="name" stroke="#8884d8" />
+          <YAxis />
+          <Tooltip />
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <Bar dataKey="attacks" barSize={25} >
+            {barChartData.map(({ color }, index) => (
+              <Cell key={`cell-${index}`} fill={color} />
+            ))}
+          </Bar>
+        </BarChart>
+
+        {/* Attack Table */}
+        <div className="table-container">
+          <TableContainer className="MuiTable" component={Paper}>
+            <Table
+              sx={{ minWidth: 450, maxWidth: 500 }}
+              aria-label="simple table"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className={classes.tableHeaderCell}>
+                    Seq. No.
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell} align="right">
+                    Date
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell} align="right">
+                    Time
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell} align="right">
+                    Attack Type
+                  </TableCell>
+                  <TableCell className={classes.tableHeaderCell} align="right">
+                    Model ID
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {attackTabeRows.map((row) => (
+                  <TableRow
+                    key={row.seq_no}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell
+                      className={classes.tableCell}
+                      component="th"
+                      scope="row"
+                    >
+                      {row.seq_no}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.date}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.time}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.attack_type}
+                    </TableCell>
+                    <TableCell className={classes.tableCell} align="right">
+                      {row.model_id}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+
+        {/* Attack Perfomance Pie Chart */}
+        <PieChart width={400} height={400}>
+          <Pie
+            dataKey="value"
+            isAnimationActive={true}
+            data={performancePieChart}
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            fill="#22c55e"
+            label
+          >
+            {performancePieChart.map(({ color }, index) => (
+              <Cell key={`cell-${index}`} fill={color} />
+            ))}
+          </Pie>
+          <Tooltip />
+        </PieChart>
+
+        {/* Card Details */}
+        <div className="card-details">
+          <div className="single-card">
+            <h3 className="card-h3">12</h3>
+            <h4 className="card-h4">Attack Count</h4>
+          </div>
+          <div className="single-card">
+            <h3 className="card-h3">04</h3>
+            <h4 className="card-h4">Client Num.</h4>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
