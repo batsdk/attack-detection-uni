@@ -18,11 +18,18 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 320px;
-  max-width: 320px;
   min-height: 100vh;
+
+  /* min-width: 320px;
+  max-width: 320px;
   background: #00346b;
-  color: #fff;
+  color: #fff; */
+
+  /* new styles */
+  min-width: 240px;
+  max-width: 240px;
+  background: #f1f2f7;
+  color: #273240;
 }
 
 .layout-child {
@@ -30,7 +37,9 @@ a {
 }
 
 .active-link {
-  color: #fff;
+  /* color: #fff; */
+  color: #5a6acf;
+
   font-size: 20px;
   width: 100%;
   text-align: center;
@@ -39,7 +48,9 @@ a {
 }
 
 .pending-link {
-  color: #fff;
+  /* color: #fff; */
+  color: #273240c9;
+
   font-size: 20px;
   width: 100%;
   text-align: center;
