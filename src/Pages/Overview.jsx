@@ -98,7 +98,7 @@ const Overview = () => {
 
         {/* Attack Table */}
         <div className="table-container">
-          <TableContainer className={classes.tableContainer} component={Paper}>
+          <TableContainer className="MuiTable" component={Paper}>
             <Table
               sx={{ minWidth: 450, maxWidth: 500 }}
               aria-label="simple table"

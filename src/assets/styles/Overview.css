@@ -3,7 +3,7 @@
 }
 
 .overview-bg {
-    background: #0B2447;
+    background: #ffffff;
 }
 
 .overview-grid {
@@ -21,7 +21,7 @@
     text-align: center;
     margin-top:0;
     padding: 10px 0;
-    color: #FEFBF6;
+    color: #111;
 }
 
 .card-details {
@@ -59,3 +59,8 @@
 .single-card h3 {
     font-size: 4.5rem;
 }
+
+.MuiTable-root {
+    box-shadow: none !important;
+  }
+  

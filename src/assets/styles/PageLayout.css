@@ -18,10 +18,10 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 320px;
-  max-width: 320px;
+  min-width: 280px;
+  max-width: 280px;
   min-height: 100vh;
-  background: #00346b;
+  background: #363740;
   color: #fff;
 }
 
