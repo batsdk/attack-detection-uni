@@ -18,8 +18,8 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 280px;
-  max-width: 280px;
+  min-width: 240px;
+  max-width: 240px;
   min-height: 100vh;
   background: #363740;
   color: #fff;
