@@ -27,8 +27,8 @@ import Paper from "@mui/material/Paper";
 import "../assets/styles/Overview.css";
 
 const Overview = () => {
-  function createData(seq_no, date, time, attack_type, model_id) {
-    return { seq_no, date, time, attack_type, model_id };
+  function createData(attack_type, date, time) {
+    return { attack_type, date, time };
   }
 
   const modelColors = {
@@ -50,11 +50,11 @@ const Overview = () => {
   ]);
 
   const [attackTabeRows, setAttackTabeRows] = useState([
-    createData(1, "2022/1/14", 6.0, "Data Poisoning", 4),
-    createData(2, "2023/12/10", 9.0, "Sybil", 43),
-    createData(3, "2021/10/30", 16.0, "Sybil", 60),
-    createData(4, "2018/1/14", 3.7, "Byzantine", 43),
-    createData(5, "2020/10/22", 16.0, "Sybil", 39),
+    createData("Data Poisoning", "2022/1/14", "22.10"),
+    createData("Sybil", "2023/12/10", "09.00", ),
+    createData("Sybil", "2021/10/30", "16.00", ),
+    createData("Byzantine", "2018/1/14", "13.17", ),
+    createData("Sybil", "2020/10/22", "15.09",),
   ]);
 
   const [performancePieChart, setPerformancePieChart] = useState([
@@ -73,6 +73,9 @@ const Overview = () => {
     },
     tableCell: {
       color: "#fff", // Set the text color for table cells
+    },
+    table: {
+      boxShadow: 'none',
     },
   });
 
@@ -102,11 +105,12 @@ const Overview = () => {
             <Table
               sx={{ minWidth: 450, maxWidth: 500 }}
               aria-label="simple table"
+              className="no-shadow"
             >
               <TableHead>
                 <TableRow>
                   <TableCell className={classes.tableHeaderCell}>
-                    Seq. No.
+                    Attack Type
                   </TableCell>
                   <TableCell className={classes.tableHeaderCell} align="right">
                     Date
@@ -114,18 +118,12 @@ const Overview = () => {
                   <TableCell className={classes.tableHeaderCell} align="right">
                     Time
                   </TableCell>
-                  <TableCell className={classes.tableHeaderCell} align="right">
-                    Attack Type
-                  </TableCell>
-                  <TableCell className={classes.tableHeaderCell} align="right">
-                    Model ID
-                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {attackTabeRows.map((row) => (
+                {attackTabeRows.map((row,index) => (
                   <TableRow
-                    key={row.seq_no}
+                    key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell
@@ -133,19 +131,13 @@ const Overview = () => {
                       component="th"
                       scope="row"
                     >
-                      {row.seq_no}
+                      {row.attack_type}
                     </TableCell>
                     <TableCell className={classes.tableCell} align="right">
                       {row.date}
                     </TableCell>
                     <TableCell className={classes.tableCell} align="right">
                       {row.time}
-                    </TableCell>
-                    <TableCell className={classes.tableCell} align="right">
-                      {row.attack_type}
-                    </TableCell>
-                    <TableCell className={classes.tableCell} align="right">
-                      {row.model_id}
                     </TableCell>
                   </TableRow>
                 ))}
