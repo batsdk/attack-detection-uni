@@ -3,7 +3,7 @@ import '../assets/styles/Navbar.css';
 import { BellIcon, ChevronDown, SearchIcon, UserIcon } from '../Icons/icon';
 const Navbar = () => (
   <nav className='navbar-container'>
-    <div className='nav-aside'>Nav Aside</div>
+    <div className='nav-aside'></div>
     <div className='navbar'>
       <section className='search'>
         <input className='search-bar' type='text' placeholder='Search' />

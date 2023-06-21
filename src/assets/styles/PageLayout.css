@@ -18,10 +18,12 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 240px;
-  max-width: 240px;
+  min-width: 238px;
+  max-width: 238px;
+  border-right: 3px solid #c8cbd9bf;
+
   min-height: 100vh;
-  background: #363740;
+  background: #42476f;
   color: #fff;
 }
 
@@ -30,9 +32,7 @@ a {
 }
 
 .active-link {
-  /* color: #fff; */
-  color: #5a6acf;
-
+  color: #fff;
   font-size: 20px;
   width: 100%;
   text-align: center;
@@ -41,9 +41,7 @@ a {
 }
 
 .pending-link {
-  /* color: #fff; */
-  color: #273240c9;
-
+  color: #fff;
   font-size: 20px;
   width: 100%;
   text-align: center;
