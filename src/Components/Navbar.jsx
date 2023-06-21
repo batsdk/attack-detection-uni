@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav className='navbar-container'>
       <div className='nav-aside'>
-        <article>Hello</article>
+        <article>{/* anything */}</article>
       </div>
       <div className='navbar'>
         <section className='search'>

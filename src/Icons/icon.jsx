@@ -5,7 +5,7 @@ export const ChevronDown = () => {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
-      fill='#627b87'
+      fill='#fff'
       className='w-6 h-6'
     >
       <path
@@ -23,7 +23,7 @@ export const SearchIcon = () => {
       fill='none'
       viewBox='0 0 24 24'
       strokeWidth={1.5}
-      stroke='#627b87'
+      stroke='#42476f'
       className='w-6 h-6'
     >
       <path
@@ -39,7 +39,7 @@ export const BellIcon = () => {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
-      fill='#B0C3CC'
+      fill='#fff'
       className='w-6 h-6'
     >
       <path
@@ -55,7 +55,7 @@ export const UserIcon = () => {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
-      fill='#627b87'
+      fill='#fff'
       className='w-6 h-6'
     >
       <path
